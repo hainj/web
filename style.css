@@ -1,0 +1,18 @@
+body{
+   
+    background-color: #B7F3BB;
+}
+.btn-default {
+    width: 90px;
+    background-color: lightgreen;
+    border-color:  #A7fFCB;
+    border-width: medium;
+    outline-color: #C7f5BB;
+        
+}
+.btn-default:hover {
+    background-color: green;
+    border-color:  #A7fFCB;
+    border-width: medium;
+        
+}
