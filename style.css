@@ -1,5 +1,5 @@
 body{
-   
+
     background-color: #B7F3BB;
 }
 .btn-default {
@@ -15,4 +15,49 @@ body{
     border-color:  #A7fFCB;
     border-width: medium;
         
+}
+
+.btn-default:focus {
+    background-color: darkgreen;
+    border-color:  #A7fFCB;
+    border-width: medium;
+        
+}
+.text {
+    padding-top:  40px;
+   margin-left:auto;
+   margin-right:auto;
+
+    text-align: left;
+    max-width: 800px;
+    
+}
+.registration {
+ 
+ margin-left:auto;
+   margin-right:auto;
+    
+    width: 350px;
+    
+}
+.img{
+    margin-left: 25px;
+    margin-right: 20px;
+    float: right;
+}
+.login{
+     margin-left:auto;
+   margin-right:auto;
+    width: 300px
+}
+div div div label{
+    text-align: left;
+    width: 30%
+}
+div div label{
+    text-align: left;
+    width: 30%
+}
+div div p{
+    text-indent: 40px;
 }
