@@ -1,28 +1,4 @@
-<!doctype html>
-<html>
-    <head>
-        <meta charset="utf-8">
-          <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-     <link rel="stylesheet" href="style.css">
-     
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-    <title>Homepage KIV/WEB Semestrální práce</title>
-    </head>
-    <body>
-        <div class="text-center">
-            <div>
-                <a href="index.html"><img src="img/header.png" alt="Header stránky Kiv/web"></a>
-            </div>
-        <div> 
-        <a class="btn btn-default" href="index.html" role="button">Home</a>
-         <a class="btn btn-default" href="registration.html" role="button">Registrace</a>
-             <a class="btn btn-default" href="login.html" role="button">Přihlásit</a>
-             <a class="btn btn-default" href="http://www.google.com" role="button">Profil</a>
-             <a class="btn btn-default" href="http://www.google.com" role="button">Příspěvky</a>
-        </div>
-            <div class="text"><p>
+<div class="text"><p>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse et justo lorem. Nullam sed mattis nisl. Nunc<img class="img"src= "img/placeholder.png" alt="Placeholder za obrázek"> orci neque, auctor ac risus sed, malesuada feugiat nunc. Interdum et malesuada fames ac ante ipsum primis in faucibus. Maecenas in justo non mi dapibus cursus. Donec iaculis faucibus lectus, gravida tempor metus consectetur ut. Nam nulla felis, convallis et condimentum ac, interdum quis mi. Nulla ornare vulputate ligula, ut dignissim ipsum rutrum vel.</p>
 <p>
     
@@ -31,6 +7,3 @@ Fusce tempor id magna ac cursus. Proin interdum venenatis neque, at ullamcorper 
                 <p>
 Suspendisse id lobortis dui. Aliquam sed commodo lacus, at fringilla magna. Fusce ut mi ultrices, efficitur ligula maximus, tincidunt ipsum. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Donec pulvinar erat vitae molestie fringilla. Aenean consectetur sit amet ligula id iaculis. Praesent vulputate nisi id orci mattis, sit amet commodo justo imperdiet. Sed vel lectus fringilla, vestibulum est nec, ullamcorper neque. Donec consectetur placerat nunc sed varius. Maecenas a gravida lorem. Pellentesque vel laoreet ligula. Etiam turpis turpis, posuere at pretium et, blandit id elit. Phasellus nec felis id justo molestie pellentesque. Nullam ut libero eu turpis volutpat aliquet. Vivamus sodales fringilla massa vitae auctor.</p>
             </div>
-        </div>
-    </body>
-</html>

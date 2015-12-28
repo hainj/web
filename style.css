@@ -2,8 +2,13 @@ body{
 
     background-color: #B7F3BB;
 }
+.list-group-item{
+    background-color: lightgreen;
+    border-color: darkgreen;
+}
+
 .btn-default {
-    width: 90px;
+    width: 130px;
     background-color: lightgreen;
     border-color:  #A7fFCB;
     border-width: medium;
@@ -16,7 +21,9 @@ body{
     border-width: medium;
         
 }
-
+.login{
+    position: relative;
+}
 .btn-default:focus {
     background-color: darkgreen;
     border-color:  #A7fFCB;
@@ -24,6 +31,7 @@ body{
         
 }
 .text {
+    position: relative;;
     padding-top:  40px;
    margin-left:auto;
    margin-right:auto;
@@ -31,6 +39,10 @@ body{
     text-align: left;
     max-width: 800px;
     
+}
+.center{
+     margin-left:auto;
+   margin-right:auto;
 }
 .registration {
  
@@ -43,13 +55,14 @@ body{
 .img{
     margin-left: 25px;
     margin-right: 20px;
-    float: right;
+    float:right;
 }
 .login{
      margin-left:auto;
    margin-right:auto;
     width: 300px
 }
+/*
 div div div label{
     text-align: left;
     width: 30%
@@ -61,3 +74,4 @@ div div label{
 div div p{
     text-indent: 40px;
 }
+*/
