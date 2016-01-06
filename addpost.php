@@ -4,8 +4,7 @@ if($user->is_loggedin() ==""){
 	$user->redirect("index.php");
 } 
 $user_id = $_SESSION['user_session'];
-$DB_con->prepare("SELECT * FROM user where id=$user_id");
-$stmt = $DB_con->prepare("SELECT * FROM user WHERE id=:id");
+$stmt = $DB_con->prepare("SELECT * FROM hainj_user WHERE id=:id");
 $stmt->execute(array(":id"=>$user_id));
 $userRow = $stmt->fetch(PDO::FETCH_ASSOC);
 ?>
@@ -41,6 +40,18 @@ $userRow = $stmt->fetch(PDO::FETCH_ASSOC);
                   <div class="text">
                   <div class="alert alert-danger">
                       <i class="glyphicon glyphicon-warning-sign"></i> &nbsp; <?php echo $_GET['error']; ?>
+                  </div>
+                  </div>
+                  <?php
+               
+            }
+                 if(isset($_GET['success']))
+            {
+               
+                  ?>
+                  <div class="text">
+                  <div class="alert alert-success">
+                      <i class="glyphicon glyphicon-ok"></i> &nbsp; <?php echo "Článek úspěšně přidán"; ?>
                   </div>
                   </div>
                   <?php

@@ -4,6 +4,7 @@ $user_id;
 $userRow;
 $posts;
 if ($user->is_loggedin()!="") {
+
   $user_id = $_SESSION['user_session'];
   $stmt = $DB_con->prepare("SELECT * FROM hainj_user WHERE id=:id");
   $stmt->execute(array(":id"=>$user_id));
@@ -11,6 +12,9 @@ if ($user->is_loggedin()!="") {
    $stmt =$DB_con->prepare("SELECT * FROM hainj_rights WHERE id=:rightsid");
    $stmt->execute(array(":rightsid"=>$userRow['Rights_id']));
    $rights=$stmt->fetch(PDO::FETCH_ASSOC);
+  if($rights['rights'] != 10) {
+     $user->redirect("index.php");
+  }
 
  
 }else{
@@ -47,10 +51,11 @@ if ($user->is_loggedin()!="") {
          </div>
             <?php
           
-            include("posttable.php");
+            include("remrevtable.php");
             ?>
             
             
        
     </body>
 </html>
+

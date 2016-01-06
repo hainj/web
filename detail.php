@@ -27,7 +27,7 @@ if($user->is_loggedin() ==""){
 </head>
 <body>
     <div class="text-center">
-         
+         <div class="text-center">
            <?php
             include("header.php");
             ?>
@@ -35,10 +35,9 @@ if($user->is_loggedin() ==""){
        <?php
             include("menu.php");
             ?>
-            
         </div>
         
-       <?php  include 'updateprofileform.php';  ?>
+       <?php  include 'detailview.php';  ?>
     </div>   
 </body>
 </html>

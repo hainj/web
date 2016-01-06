@@ -2,15 +2,19 @@
 require_once 'dbconfig.php';
 $user_id;
 $userRow;
+$rights;
 if ($user->is_loggedin()!="") {
   if (isset($_GET['logout'])){
     $user->logout();
   }
   else{
   $user_id = $_SESSION['user_session'];
-  $stmt = $DB_con->prepare("SELECT * FROM user WHERE id=:id");
+  $stmt = $DB_con->prepare("SELECT * FROM hainj_user WHERE id=:id");
   $stmt->execute(array(":id"=>$user_id));
   $userRow=$stmt->fetch(PDO::FETCH_ASSOC);
+  $stmt =$DB_con->prepare("SELECT * FROM hainj_rights WHERE id=:rightsid");
+	$stmt->execute(array(":rightsid"=>$userRow['Rights_id']));
+	$rights=$stmt->fetch(PDO::FETCH_ASSOC);
   }
 }
 ?>
@@ -46,7 +50,7 @@ if ($user->is_loggedin()!="") {
               ?>
               <div class="text">
                 <div class="alert alert-success">
-                  <i class="glyphicon glyphicon-ok"></i>&nbsp; Registration successfull
+                  <i class="glyphicon glyphicon-ok"></i>&nbsp; Registrace proběhla úspěšně
                 </div>
               </div>
             <?php
@@ -55,7 +59,7 @@ if ($user->is_loggedin()!="") {
                 ?>
               <div class="text">
                 <div class="alert alert-success">
-                  <i class="glyphicon glyphicon-ok"></i>&nbsp; Login successfull <?php echo "$user_id" ?>
+                  <i class="glyphicon glyphicon-ok"></i>&nbsp; Vítejte uživateli <?php echo "$userRow[name] $userRow[surname] s právy $rights[name]" ?>
                 </div>
               </div>
               
@@ -66,7 +70,7 @@ if ($user->is_loggedin()!="") {
                 ?>
               <div class="text">
                 <div class="alert alert-success">
-                  <i class="glyphicon glyphicon-ok"></i>&nbsp; Logout successfull
+                  <i class="glyphicon glyphicon-ok"></i>&nbsp; Ohlášen úspěšně
                 </div>
               </div>
               
@@ -77,7 +81,7 @@ if ($user->is_loggedin()!="") {
                 ?>
               <div class="text">
                 <div class="alert alert-success">
-                  <i class="glyphicon glyphicon-ok"></i>&nbsp; Logged out inactivity (>30)
+                  <i class="glyphicon glyphicon-ok"></i>&nbsp; Odhlášen z důvodu neaktivity po více než 30 minut
                 </div>
               </div>
               

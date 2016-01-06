@@ -12,7 +12,15 @@ if(isset($_POST['submit']))
    $pass2 = $_POST['heslo2']; 
    $rights = $_POST['prava'];
    $id= $_SESSION['user_session'];
-   if(trim($name)=="") {
+
+    $user_id = $_SESSION['user_session'];
+  	$stmt = $DB_con->prepare("SELECT * FROM hainj_user WHERE id=:id");
+  	$stmt->execute(array(":id"=>$user_id));
+  	$userRow=$stmt->fetch(PDO::FETCH_ASSOC);
+  	$stmt =$DB_con->prepare("SELECT * FROM hainj_rights WHERE id=:rightsid");
+	$stmt->execute(array(":rightsid"=>$userRow['Rights_id']));
+	$rights=$stmt->fetch(PDO::FETCH_ASSOC);
+  if(trim($name)=="") {
 
        $user->redirect('editprofile.php?error=Provide name!');
    }
@@ -40,7 +48,7 @@ if(isset($_POST['submit']))
    		
       try
       {
-         $stmt = $DB_con->prepare("SELECT id, email FROM user WHERE email=:umail");
+         $stmt = $DB_con->prepare("SELECT id, email FROM hainj_user WHERE email=:umail");
          $stmt->execute(array(':umail'=>$email));
          $row=$stmt->fetch(PDO::FETCH_ASSOC);
     
@@ -52,8 +60,11 @@ if(isset($_POST['submit']))
          {
             if($user->update($name,$surn, $email,$pass,$rights ,$id)) 
             {
-            	
-                $user->redirect('editprofile.php?updated');
+            	if ($rights['rights']==10) {
+            		$user->redirect('editprofile.php?updated');
+            	}else{
+                $user->redirect('profile.php?updated');
+                }
             }
          }
          }
@@ -62,7 +73,11 @@ if(isset($_POST['submit']))
             if($user->update($name,$surn, $email, $pass, $rights, $id)) 
             {
             	
-                $user->redirect('editprofile.php?updated');
+                if ($rights['rights']==10) {
+            		$user->redirect('editprofile.php?updated');
+            	}else{
+                $user->redirect('profile.php?updated');
+                }
             }
          }
       

@@ -6,8 +6,8 @@ if ($user->is_loggedin()=="") {
 if(isset($_POST['submit']))
 {
 	$user_id = $_SESSION['user_session'];
-	$DB_con->prepare("SELECT * FROM user where id=$user_id");
-	$stmt = $DB_con->prepare("SELECT * FROM user WHERE id=:id");
+	
+	$stmt = $DB_con->prepare("SELECT * FROM hainj_user WHERE id=:id");
 	$stmt->execute(array(":id"=>$user_id));
 	$userRow = $stmt->fetch(PDO::FETCH_ASSOC);
 	$login = $userRow['name'].$userRow['surname'];
@@ -18,7 +18,7 @@ if(isset($_POST['submit']))
 	$temp = explode(".", $_FILES["soubor"]["name"]);
 	$extension = end($temp);
 	$upload = false;
-
+	 
     if(trim($name) ==""){
     	$user->redirect('addpost.php?error=Není vyplněno jméno článku');
     } else if(trim($author)==""){
@@ -29,15 +29,25 @@ if(isset($_POST['submit']))
     if(!file_exists("upload")){
     	mkdir("upload/");
     }
-    $stmt = $DB_con->prepare("SELECT * FROM Post WHERE name=:uname");
+    $stmt = $DB_con->prepare("SELECT * FROM hainj_post WHERE name=:uname");
     $stmt->execute(array(':uname'=>$name));
     $row = $stmt->fetch(PDO::FETCH_ASSOC);
     if ($row['name']==$name) {
    		$user->redirect('addpost.php?error=Existuje článek se stejným názvem');
     }
 
-    if (!file_exists("upload/$login/")) {
-			mkdir("upload/$login/");
+    $input = $login; // UTF8 encoded
+	$input = iconv('UTF-8', 'ASCII//TRANSLIT', $input);
+	$input = preg_replace('/[^a-zA-Z0-9]/', '_', $input);
+
+
+	$namepdpf = $name; // UTF8 encoded
+	$namepdpf = iconv('UTF-8', 'ASCII//TRANSLIT', $namepdpf);
+	$namepdpf = preg_replace('/[^a-zA-Z0-9]/', '_', $namepdpf);
+
+    if (!file_exists("upload/$input/")) {
+    	
+			mkdir("upload/$input/");
 	}
 	if (($_FILES["soubor"]["type"] == "application/pdf") && ($_FILES["soubor"]["size"] < 2000000)){
 		
@@ -57,7 +67,7 @@ if(isset($_POST['submit']))
 				//zmeni nazev souboru a ulozi
 				else{
 					move_uploaded_file($_FILES["soubor"]["tmp_name"],
-					"upload/$login/$name"."_" . $_FILES["soubor"]["name"]);
+					"upload/$input/$namepdpf"."_" . $_FILES["soubor"]["name"]);
 					$upload = true;
 
 				}
@@ -67,8 +77,9 @@ if(isset($_POST['submit']))
 		$user->redirect('addpost.php?error=Pouze pdf');
     }
     if($upload == true){
-	$pdf = "upload/$login/$name"."_" . $_FILES["soubor"]["name"]; 
-	$stmt = $DB_con->prepare("INSERT INTO post (id,name,author,abstract,pdf,User_id) 
+	$pdf = "upload/$input/$namepdpf"."_" . rawurlencode($_FILES["soubor"]["name"]); 
+
+	$stmt = $DB_con->prepare("INSERT INTO hainj_post (id,name,author,abstract,pdf,User_id) 
 		VALUES (NULL, :uname, :uauthor, :uabstract, :updf, :uuser_id)");
 	$stmt->bindparam(":uname", $name);
     $stmt->bindparam(":uauthor", $author);

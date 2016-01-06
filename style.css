@@ -2,6 +2,16 @@ body{
 
     background-color: #B7F3BB;
 }
+table{
+    border: 1px solid black;
+    width: 1000px;
+}
+th{
+    width: 900px;
+}
+table th {
+    width: auto !important;
+}
 .list-group-item{
     background-color: lightgreen;
     border-color: darkgreen;
@@ -62,16 +72,3 @@ body{
    margin-right:auto;
     width: 300px
 }
-/*
-div div div label{
-    text-align: left;
-    width: 30%
-}
-div div label{
-    text-align: left;
-    width: 30%
-}
-div div p{
-    text-indent: 40px;
-}
-*/

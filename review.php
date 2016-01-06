@@ -8,10 +8,12 @@ if ($user->is_loggedin()!="") {
   $stmt = $DB_con->prepare("SELECT * FROM hainj_user WHERE id=:id");
   $stmt->execute(array(":id"=>$user_id));
   $userRow=$stmt->fetch(PDO::FETCH_ASSOC);
-   $stmt =$DB_con->prepare("SELECT * FROM hainj_rights WHERE id=:rightsid");
-   $stmt->execute(array(":rightsid"=>$userRow['Rights_id']));
-   $rights=$stmt->fetch(PDO::FETCH_ASSOC);
-
+  if($userRow['Rights_id']==0){
+    $user->redirect("index.php");
+  }
+  $stmt = $DB_con->prepare("SELECT * FROM hainj_post");
+  $stmt->execute();
+  $posts=$stmt->fetchAll();
  
 }else{
     $user->redirect("index.php");
@@ -29,7 +31,7 @@ if ($user->is_loggedin()!="") {
               <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
         
    
-    <title>Homepage KIV/WEB Semestrální práce</title>
+    <title>Hodnocení KIV/WEB Semestrální práce</title>
     </head>
     <body>
         <div class="text-center">
@@ -46,8 +48,12 @@ if ($user->is_loggedin()!="") {
         </div>
          </div>
             <?php
-          
-            include("posttable.php");
+            //pokud recenzent/admin možnost recenzovat články přidělené k recenzi, po schválení nelze hodnocení změnit- nezobrazovat v seznamu
+            //SELECT * FROM review WHERE User_id=$_SESSION[user_session]
+            //UPDATE review SET(....) WHERE User_id= id=$_SESSION[user_session] AND Post_id=$id
+            //Nahoře selektor pro článek k úpravě
+            //přidat accepted k článku 
+            include("reviewpostform.php");
             ?>
             
             

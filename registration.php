@@ -35,7 +35,7 @@ if(isset($_POST['submit']))
    {
       try
       {
-         $stmt = $DB_con->prepare("SELECT email FROM user WHERE email=:umail");
+         $stmt = $DB_con->prepare("SELECT email FROM hainj_user WHERE email=:umail");
          $stmt->execute(array(':umail'=>$email));
          $row=$stmt->fetch(PDO::FETCH_ASSOC);
     
@@ -72,7 +72,7 @@ if(isset($_POST['submit']))
 </head>
 <body>
     <div class="text-center">
-         <div class="text-center">
+         
            <?php
             include("header.php");
             ?>
@@ -115,7 +115,7 @@ if(isset($_POST['submit']))
                 <br>
                 <label>Heslo znovu*:</label>
                 <input type="password" name="heslo2" tabindex="1" required><br><br>
-                <input type="submit" value="Registrovat" name ="submit" class="btn btn-default"></input>
+                <input type="submit" value="Registrovat" name ="submit" class="btn btn-default">
                 </form>
             </div>
         </div>

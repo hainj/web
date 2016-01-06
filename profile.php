@@ -4,14 +4,13 @@ if($user->is_loggedin() ==""){
 	$user->redirect("index.php");
 } 
 $user_id = $_SESSION['user_session'];
-$DB_con->prepare("SELECT * FROM user where id=$user_id");
-$stmt = $DB_con->prepare("SELECT * FROM user WHERE id=:id");
+$stmt = $DB_con->prepare("SELECT * FROM hainj_user WHERE id=:id");
 $stmt->execute(array(":id"=>$user_id));
 $userRow=$stmt->fetch(PDO::FETCH_ASSOC);
-$stmt =$DB_con->prepare("SELECT * FROM rights WHERE id=:rightsid");
+$stmt =$DB_con->prepare("SELECT * FROM hainj_rights WHERE id=:rightsid");
 $stmt->execute(array(":rightsid"=>$userRow['Rights_id']));
 $rights=$stmt->fetch(PDO::FETCH_ASSOC);
-$stmt =$DB_con->prepare("SELECT * FROM Post WHERE id=:user_id");
+$stmt =$DB_con->prepare("SELECT * FROM hainj_Post WHERE User_id=:user_id");
 $stmt->execute(array(":user_id"=>$user_id));
 $stmt->fetch(PDO::FETCH_ASSOC);
 $rowcount = $stmt->rowcount();
@@ -32,7 +31,7 @@ $rowcount = $stmt->rowcount();
 </head>
 <body>
     <div class="text-center">
-         <div class="text-center">
+         
            <?php
             include("header.php");
             ?>
@@ -40,21 +39,20 @@ $rowcount = $stmt->rowcount();
        <?php
             include("menu.php");
             ?>
+            </div>
         </div>
         <?php
-              if(isset($error))
+             if(isset($_GET['updated']))
             {
-               foreach ($error as $error) {
-                   # code...
                
                   ?>
                   <div class="text">
-                  <div class="alert alert-danger">
-                      <i class="glyphicon glyphicon-warning-sign"></i> &nbsp; <?php echo $error; ?>
+                  <div class="alert alert-success">
+                      <i class="glyphicon glyphicon-ok"></i> &nbsp; <?php echo "Změna osobních údajů proběhla úspěšně"; ?>
                   </div>
                   </div>
                   <?php
-               }
+               
             }
             ?>
         <div class="center" style="width: 30%; padding-top: 25px;">
@@ -66,9 +64,9 @@ $rowcount = $stmt->rowcount();
             <li class="list-group-item text-right"><span class="pull-left"><strong>Počet příspěvků</strong></span> <?php echo "$rowcount"?></li>
             <li class="list-group-item text-right"><span class="pull-left"><strong>Práva</strong></span> <?php echo "$rights[name]"?></li>
           </ul> 
-          <a href="editprofile.php" class="btn btn-default"role="button">Upravit</a>
+          <a href="editprofile.php" class="btn btn-default" role="button">Upravit</a>
 		</div>
-    </div>   
+     
 </body>
 </html>
 

@@ -3,7 +3,7 @@ require_once 'dbconfig.php';
 
 if($user->is_loggedin()!="")
 {
- $user->redirect('index.php');
+    $user->redirect('index.php');
 }
 
 if(isset($_POST['submit']))
@@ -61,7 +61,7 @@ if(isset($_POST['submit']))
       		</div>
             <div class="login">
                 <br>
-                <form action="" method="post">
+                <form action="#" method="post">
                 	<label>E-mail*:</label>
                 	<input type="email" name="email" tabindex="4" required><br>
                 	<br>
